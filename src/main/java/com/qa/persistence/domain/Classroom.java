@@ -1,13 +1,12 @@
 package com.qa.persistence.domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -15,15 +14,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class Classroom {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "classroomID")
 	private Long classroomID;
 	@Column(length = 100)
 	private String trainerName;
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="trainees", referencedColumnName="classroomID")
-	public Set<Trainee> trainees;
+	@OneToMany(fetch=FetchType.EAGER, targetEntity=Trainee.class, cascade=CascadeType.ALL)
+	@JoinColumn(name="classroomID", referencedColumnName="classroomID")
+	public Set<Trainee> trainees = new HashSet<Trainee>();;
 
 	public Classroom() {
 
