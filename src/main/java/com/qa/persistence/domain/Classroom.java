@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,7 +19,6 @@ public class Classroom {
 	@Column(length = 100)
 	private String trainerName;
 	@OneToMany(fetch=FetchType.EAGER, targetEntity=Trainee.class, cascade=CascadeType.ALL)
-	@JoinColumn(name="classroomID", referencedColumnName="classroomID")
 	public Set<Trainee> trainees = new HashSet<Trainee>();;
 
 	public Classroom() {
