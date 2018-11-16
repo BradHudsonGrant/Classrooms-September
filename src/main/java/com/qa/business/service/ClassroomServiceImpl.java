@@ -2,21 +2,16 @@ package com.qa.business.service;
 
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
-
 import com.qa.persistence.repository.ClassroomRepo;
 
 
 
 public class ClassroomServiceImpl implements ClassroomService {
 
-	private static final Logger LOGGER = Logger.getLogger(ClassroomService.class);
-
 	@Inject
 	private ClassroomRepo repo;
 
 	public String getAll() {
-		LOGGER.info("In AccountServiceImpl getAllAccounts ");
 		return repo.getAll();
 	}
 
