@@ -3,7 +3,7 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ public class ClassroomDBRepo implements ClassroomRepo {
 
 	public String getAll() {
 		Query query = manager.createQuery("Select a FROM Classroom a");
-		Collection<Classroom> classrooms = (Collection<Classroom>) query.getResultList();
+		ArrayList<Classroom> classrooms = (ArrayList<Classroom>) query.getResultList();
 		return util.getJSONForObject(classrooms);
 	}
 
@@ -36,7 +36,7 @@ public class ClassroomDBRepo implements ClassroomRepo {
 	public String createClassroom(String newClassroom) {
 		Classroom classroom = util.getObjectForJSON(newClassroom, Classroom.class);
 		manager.persist(classroom);
-		return "{\"message\": \"account has been sucessfully added\"}";
+		return "{\"message\": \"Classroom has been sucessfully added\"}";
 	}
 
 	@Transactional(REQUIRED)
@@ -47,7 +47,7 @@ public class ClassroomDBRepo implements ClassroomRepo {
 			classroomFromDB = updatedClassroom;
 			manager.merge(classroomFromDB);
 		}
-		return "{\"message\": \"account sucessfully updated\"}";
+		return "{\"message\": \"Classroom sucessfully updated\"}";
 	}
 
 	@Transactional(REQUIRED)
@@ -56,7 +56,7 @@ public class ClassroomDBRepo implements ClassroomRepo {
 		if (classroomInDB != null) {
 			manager.remove(classroomInDB);
 		}
-		return "{\"message\": \"account sucessfully deleted\"}";
+		return "{\"message\": \"Classroom sucessfully deleted\"}";
 	}
 
 	private Classroom findClassroom(Long id) {

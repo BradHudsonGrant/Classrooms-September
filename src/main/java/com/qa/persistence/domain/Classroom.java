@@ -1,27 +1,25 @@
 package com.qa.persistence.domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Classroom {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "classroomID")
 	private Long classroomID;
 	@Column(length = 100)
 	private String trainerName;
-	@OneToMany
-	@JoinColumn(name="traineeID", referencedColumnName="classroomID")
-	public ArrayList<Trainee> trainees;
+	@OneToMany(fetch=FetchType.EAGER, targetEntity=Trainee.class, cascade=CascadeType.ALL)
+	public Set<Trainee> trainees = new HashSet<Trainee>();;
 
 	public Classroom() {
 
@@ -32,11 +30,11 @@ public class Classroom {
 		this.trainerName = name;
 	}
 
-	public ArrayList<Trainee> getTrainees() {
+	public Set<Trainee> getTrainees() {
 		return trainees;
 	}
 
-	public void setTrainees(ArrayList<Trainee> trainees) {
+	public void setTrainees(Set<Trainee> trainees) {
 		this.trainees = trainees;
 	}
 
