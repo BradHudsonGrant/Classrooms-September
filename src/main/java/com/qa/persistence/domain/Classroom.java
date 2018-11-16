@@ -1,9 +1,11 @@
 package com.qa.persistence.domain;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,9 +21,9 @@ public class Classroom {
 	private Long classroomID;
 	@Column(length = 100)
 	private String trainerName;
-	@OneToMany
-	@JoinColumn(name="traineeID", referencedColumnName="classroomID")
-	public ArrayList<Trainee> trainees;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="trainees", referencedColumnName="classroomID")
+	public Set<Trainee> trainees;
 
 	public Classroom() {
 
@@ -32,11 +34,11 @@ public class Classroom {
 		this.trainerName = name;
 	}
 
-	public ArrayList<Trainee> getTrainees() {
+	public Set<Trainee> getTrainees() {
 		return trainees;
 	}
 
-	public void setTrainees(ArrayList<Trainee> trainees) {
+	public void setTrainees(Set<Trainee> trainees) {
 		this.trainees = trainees;
 	}
 
