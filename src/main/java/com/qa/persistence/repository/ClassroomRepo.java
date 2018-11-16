@@ -4,9 +4,9 @@ public interface ClassroomRepo {
 
 	String getAll();
 
-	String createAccount(String accout);
+	String createClassroom(String classroom);
 
-	String updateClassroom(Long id, String accountToUpdate);
+	String updateClassroom(Long id, String classroom);
 
 	String deleteClassroom(Long id);
 
