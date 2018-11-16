@@ -33,7 +33,7 @@ public class ClassroomDBRepo implements ClassroomRepo {
 	}
 
 	@Transactional(REQUIRED)
-	public String createAccount(String newClassroom) {
+	public String createClassroom(String newClassroom) {
 		Classroom classroom = util.getObjectForJSON(newClassroom, Classroom.class);
 		manager.persist(classroom);
 		return "{\"message\": \"account has been sucessfully added\"}";
